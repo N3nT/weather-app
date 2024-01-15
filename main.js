@@ -7,6 +7,8 @@ const dataInfo = document.querySelector('.box__left-weather-info-date')
 
 const searchButton = document.querySelector('.box__right-btn')
 const cityInput = document.querySelector('.box__right-input')
+const lastLocations = document.querySelector('.box__right-locations')
+
 const pressure = document.querySelector('.box__right-info-pressure')
 const humidity = document.querySelector('.box__right-info-humidity')
 const maxTemp = document.querySelector('.box__right-info-maxtemp')
@@ -64,8 +66,9 @@ const getWeather = () => {
 
 	axios.get(URL).then((resposne) => {
 		const data = resposne.data
-		console.log(data);
-    writeData(data)
+		console.log(data)
+		writeData(data)
+		lastSearch(data.name)
 	})
 }
 
@@ -78,13 +81,29 @@ const writeData = (data) => {
 	tempContent.innerHTML = `${Math.floor(data.main.feels_like)}&deg;`
 	pressure.textContent = `Pressure: ${data.main.pressure} hPa`
 	humidity.textContent = `Humidity: ${data.main.humidity} %`
-  maxTemp.innerHTML = `Max. temp: ${Math.floor(data.main.temp_max)}&deg;C`
-  minTemp.innerHTML = `Min. temp: ${Math.floor(data.main.temp_max)}&deg;C`
-  if(data.visibility < 1000){
-    visibility.textContent = `Visibility: ${data.visibility} m`
-  } else {
-    visibility.textContent = `Visibility: ${data.visibility/1000} km`
-  }
+	maxTemp.innerHTML = `Max. temp: ${Math.floor(data.main.temp_max)}&deg;C`
+	minTemp.innerHTML = `Min. temp: ${Math.floor(data.main.temp_max)}&deg;C`
+	if (data.visibility < 1000) {
+		visibility.textContent = `Visibility: ${data.visibility} m`
+	} else {
+		visibility.textContent = `Visibility: ${data.visibility / 1000} km`
+	}
+}
+
+const lastSearch = (city) => {
+	const lastLocationsNode = lastLocations.querySelectorAll(
+		'.box__right-location'
+	)
+	const lastLocation = document.createElement('p')
+	lastLocation.textContent = city
+	lastLocation.classList.add('box__right-location')
+	if (lastLocationsNode.length > 0) {			//???
+		lastLocations.lastChild.remove()
+		lastLocations.prepend(lastLocation)
+	} else{
+		lastLocations.prepend(lastLocation)
+	}
+	
 }
 
 document.addEventListener('load', getWeather(), getTime())
