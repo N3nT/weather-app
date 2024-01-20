@@ -102,5 +102,12 @@ body{
             opacity: 0.6;
             font-size: 12px;
         }
+        &-info{
+            font-size: 12px;
+            opacity: 0.6;
+            &-item{
+                padding: 10px;
+            }
+        }
     }
 }

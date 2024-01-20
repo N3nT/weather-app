@@ -13,7 +13,12 @@ const pressure = document.querySelector('.box__right-info-pressure')
 const humidity = document.querySelector('.box__right-info-humidity')
 const maxTemp = document.querySelector('.box__right-info-maxtemp')
 const minTemp = document.querySelector('.box__right-info-mintemp')
+const feelsLike = document.querySelector('.box__right-info-feelslike')
 const visibility = document.querySelector('.box__right-info-visibility')
+
+const windSpeed = document.querySelector('.box__right-info-windspeed')
+const windGust = document.querySelector('.box__right-info-windgust')
+const windDeg = document.querySelector('.box__right-info-winddeg')
 
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather?q='
 const API_KEY = 'a1f28905bb879b4ebe17972bf2fe8cf6'
@@ -78,16 +83,20 @@ const setCookie = (name, value) => {
 
 const writeData = (data) => {
 	cityName.textContent = data.name
-	tempContent.innerHTML = `${Math.floor(data.main.feels_like)}&deg;`
+	tempContent.innerHTML = `${Math.round(data.main.temp, 0.5)}&deg;`
 	pressure.textContent = `Pressure: ${data.main.pressure} hPa`
 	humidity.textContent = `Humidity: ${data.main.humidity} %`
-	maxTemp.innerHTML = `Max. temp: ${Math.floor(data.main.temp_max)}&deg;C`
-	minTemp.innerHTML = `Min. temp: ${Math.floor(data.main.temp_max)}&deg;C`
+	maxTemp.innerHTML = `Max. temp: ${Math.round(data.main.temp_max, 0.5)}&deg;C`
+	minTemp.innerHTML = `Min. temp: ${Math.round(data.main.temp_min, 0.5)}&deg;C`
+	feelsLike.innerHTML = `Feels like: ${Math.round(data.main.feels_like)}&deg;C`
 	if (data.visibility < 1000) {
 		visibility.textContent = `Visibility: ${data.visibility} m`
 	} else {
 		visibility.textContent = `Visibility: ${data.visibility / 1000} km`
 	}
+	windSpeed.textContent = `Wind speed: ${data.wind.speed} (m/s)`
+	windGust.textContent = `Wind gust: ${data.wind.gust} (m/s)`
+	windDeg.textContent = `Wind degree: ${data.wind.deg}`
 }
 
 const lastSearch = (city) => {
