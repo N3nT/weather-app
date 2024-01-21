@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CloudScape | </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./cloud.ico">
 </head>
+
 <body>
     <div class="box">
         <div class="box__left">
@@ -20,32 +25,34 @@
             </div>
         </div>
         <div class="box__right">
-                <div class="holder">
-                    <input type="text" class="box__right-input" placeholder="Another location">
-                    <button type="submit" class="box__right-btn"><img src="./img/glass.png" class="box__right-btn-icon"></button>
-                </div>
-                <div class="box__right-locations">
-                    <!-- <p class="box__right-location">Birmighan</p>
+            <div class="holder">
+                <input type="text" class="box__right-input" placeholder="Another location">
+                <button type="submit" class="box__right-btn"><img src="./img/glass.png"
+                        class="box__right-btn-icon"></button>
+            </div>
+            <div class="box__right-locations">
+                <!-- <p class="box__right-location">Birmighan</p>
                     <p class="box__right-location">Manchester</p>
                     <p class="box__right-location">New York</p>
                     <p class="box__right-location">California</p> -->
-                </div>
+            </div>
+            <hr>
+            <div class="box__right-info">
+                <p class="box__right-info-maxtemp box__right-info-item"></p>
+                <p class="box__right-info-mintemp box__right-info-item"></p>
+                <p class="box__right-info-feelslike box__right-info-item"></p>
                 <hr>
-                <div class="box__right-info">
-                    <p class="box__right-info-maxtemp box__right-info-item"></p>
-                    <p class="box__right-info-mintemp box__right-info-item"></p>
-                    <p class="box__right-info-feelslike box__right-info-item"></p>
-                    <hr>
-                    <p class="box__right-info-pressure box__right-info-item"></p>
-                    <p class="box__right-info-humidity box__right-info-item"></p>
-                    <p class="box__right-info-visibility box__right-info-item"></p>
-                    <hr>
-                    <p class="box__right-info-windspeed box__right-info-item"></p>
-                    <p class="box__right-info-windgust box__right-info-item"></p>
-                    <p class="box__right-info-winddeg box__right-info-item"></p>
-                </div>
+                <p class="box__right-info-pressure box__right-info-item"></p>
+                <p class="box__right-info-humidity box__right-info-item"></p>
+                <p class="box__right-info-visibility box__right-info-item"></p>
+                <hr>
+                <p class="box__right-info-windspeed box__right-info-item"></p>
+                <p class="box__right-info-windgust box__right-info-item"></p>
+                <p class="box__right-info-winddeg box__right-info-item"></p>
+            </div>
         </div>
     </div>
     <script type="module" src="main.js"></script>
 </body>
+
 </html>

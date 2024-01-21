@@ -8,6 +8,7 @@ const dataInfo = document.querySelector('.box__left-weather-info-date')
 const searchButton = document.querySelector('.box__right-btn')
 const cityInput = document.querySelector('.box__right-input')
 const lastLocations = document.querySelector('.box__right-locations')
+const lastLocation = document.querySelectorAll('.box__right-location')
 
 const pressure = document.querySelector('.box__right-info-pressure')
 const humidity = document.querySelector('.box__right-info-humidity')
@@ -72,8 +73,8 @@ const getWeather = () => {
 	axios.get(URL).then((resposne) => {
 		const data = resposne.data
 		console.log(data)
-		writeData(data)
 		lastSearch(data.name)
+		writeData(data)
 	})
 }
 
@@ -95,7 +96,11 @@ const writeData = (data) => {
 		visibility.textContent = `Visibility: ${data.visibility / 1000} km`
 	}
 	windSpeed.textContent = `Wind speed: ${data.wind.speed} (m/s)`
-	windGust.textContent = `Wind gust: ${data.wind.gust} (m/s)`
+	if (data.wind.gust === undefined) {
+		windGust.textContent = `Wind gust: no data`
+	} else {
+		windGust.textContent = `Wind gust: ${data.wind.gust} (m/s)`
+	}
 	windDeg.textContent = `Wind degree: ${data.wind.deg}`
 }
 
@@ -103,16 +108,29 @@ const lastSearch = (city) => {
 	const lastLocationsNode = lastLocations.querySelectorAll(
 		'.box__right-location'
 	)
-	const lastLocation = document.createElement('p')
-	lastLocation.textContent = city
-	lastLocation.classList.add('box__right-location')
-	if (lastLocationsNode.length > 0) {			//???
-		lastLocations.lastChild.remove()
-		lastLocations.prepend(lastLocation)
-	} else{
-		lastLocations.prepend(lastLocation)
+	let lastLocationsArray = convertNodeList(lastLocationsNode)
+	console.log(lastLocationsArray)
+	const lastLocationElement = document.createElement('p')
+	lastLocationElement.classList.add('box__right-location')
+
+	if (!lastLocationsArray.includes(city)) {
+		lastLocationElement.textContent = city
+		if (lastLocationsNode.length > 0) {
+			//???
+			lastLocations.lastChild.remove()
+			lastLocations.prepend(lastLocationElement)
+		} else {
+			lastLocations.prepend(lastLocationElement)
+		}
 	}
-	
+}
+
+const convertNodeList = (nodeList) => {
+	let array = []
+	for (let i = 0; i < nodeList.length; i++) {
+		array[i] = nodeList[i].textContent
+	}
+	return array
 }
 
 document.addEventListener('load', getWeather(), getTime())
