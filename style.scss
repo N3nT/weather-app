@@ -21,8 +21,9 @@ body {
 }
 .box {
 	display: flex;
-	width: 900px;
+	width: 1000px;
 	height: 600px;
+	border: 1px solid black;
 	background-image: url('./img/default.jpg');
 	background-size: cover;
 	background-position: center;
@@ -60,7 +61,7 @@ body {
 		}
 	}
 	&__right {
-		backdrop-filter: blur(10px) grayscale(0.7);
+		backdrop-filter: blur(10px) grayscale(0.6);
 		width: 35%;
 		height: 100%;
 		padding-left: 3em;
@@ -105,9 +106,9 @@ body {
 			margin-top: 30px;
 		}
 		&-location {
-			padding: 10px;
+			padding: 0.8em;
 			opacity: 0.6;
-			font-size: 14px;
+			font-size: 1.2rem;
             cursor: pointer;
             transition: opacity 0.5s, background-color 0.2s;
             &:hover{

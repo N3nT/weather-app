@@ -78,8 +78,8 @@ const getWeather = (cityName) => {
 		lastSearch(data.name)
 		writeData(data)
 		document.cookie = `cityName=${data.name}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
-		setBackground(600)
-		//data.weather[0].id
+		setBackground(data.weather[0].id)
+		//701
 	})
 	cityInput.value = ''
 }
@@ -159,7 +159,8 @@ const setBackground = (status) => {
 		box.style.backgroundImage = 'url(./img/602.jpg)'
 	} 
 	else if(status === 701){
-		//zdjecie okocimia
+		body.style.backgroundImage = "url(/img/701.jpg)"
+		box.style.backgroundImage = 'url(./img/701.jpg)'
 	} else if(status === 711){
 		body.style.backgroundImage = "url(/img/711.jpg)"
 		box.style.backgroundImage = 'url(./img/711.jpg)'
