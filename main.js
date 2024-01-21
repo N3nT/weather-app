@@ -26,6 +26,7 @@ const API_KEY = 'a1f28905bb879b4ebe17972bf2fe8cf6'
 const API_UNITS = '&units=metric'
 
 const getTime = () => {
+	console.log('time')
 	const days = [
 		'Sunday',
 		'Monday',
@@ -133,7 +134,13 @@ const convertNodeList = (nodeList) => {
 	return array
 }
 
-document.addEventListener('load', getWeather(), getTime())
+document.addEventListener('load',
+	getWeather(),
+	getTime(),
+	setInterval(() => {
+		getTime()
+	}, 1000)
+)
 searchButton.addEventListener('click', getWeather)
 cityInput.addEventListener('keydown', (e) => {
 	if (e.code === 'Enter') {
