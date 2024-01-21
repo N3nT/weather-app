@@ -8,7 +8,6 @@ const dataInfo = document.querySelector('.box__left-weather-info-date')
 const searchButton = document.querySelector('.box__right-btn')
 const cityInput = document.querySelector('.box__right-input')
 const lastLocations = document.querySelector('.box__right-locations')
-const lastLocation = document.querySelectorAll('.box__right-location')
 
 const pressure = document.querySelector('.box__right-info-pressure')
 const humidity = document.querySelector('.box__right-info-humidity')
@@ -26,7 +25,6 @@ const API_KEY = 'a1f28905bb879b4ebe17972bf2fe8cf6'
 const API_UNITS = '&units=metric'
 
 const getTime = () => {
-	console.log('time')
 	const days = [
 		'Sunday',
 		'Monday',
@@ -67,8 +65,8 @@ const getTime = () => {
 	dataInfo.textContent = `${hours}:${minutes} - ${dayName}, ${dayNum} ${monthName} ${year}`
 }
 
-const getWeather = () => {
-	const city = cityInput.value || 'Brzesko'
+const getWeather = (cityName) => {
+	const city = cityName || 'Brzesko'
 	const URL = API_LINK + city + API_UNITS + `&appid=${API_KEY}`
 
 	axios.get(URL).then((resposne) => {
@@ -76,12 +74,16 @@ const getWeather = () => {
 		console.log(data)
 		lastSearch(data.name)
 		writeData(data)
+		document.cookie = `cityName=${data.name}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
 	})
+	cityInput.value = ''
 }
 
-const setCookie = (name, value) => {
-	document.cookie = `${name} = ${value}; expires=24*60*60*1000;`
-}
+const getCookie = (name) => {
+	const value = `; ${document.cookie}`;
+	const parts = value.split(`; ${name}=`);
+	if (parts.length === 2) return parts.pop().split(';').shift();
+  }
 
 const writeData = (data) => {
 	cityName.textContent = data.name
@@ -110,13 +112,12 @@ const lastSearch = (city) => {
 		'.box__right-location'
 	)
 	let lastLocationsArray = convertNodeList(lastLocationsNode)
-	console.log(lastLocationsArray)
 	const lastLocationElement = document.createElement('p')
 	lastLocationElement.classList.add('box__right-location')
 
 	if (!lastLocationsArray.includes(city)) {
 		lastLocationElement.textContent = city
-		if (lastLocationsNode.length > 0) {
+		if (lastLocationsNode.length > 2) {
 			//???
 			lastLocations.lastChild.remove()
 			lastLocations.prepend(lastLocationElement)
@@ -135,16 +136,21 @@ const convertNodeList = (nodeList) => {
 }
 
 document.addEventListener('load',
-	getWeather(),
+	getWeather(getCookie('cityName')),
 	getTime(),
 	setInterval(() => {
 		getTime()
 	}, 1000)
 )
-searchButton.addEventListener('click', getWeather)
-cityInput.addEventListener('keydown', (e) => {
-	if (e.code === 'Enter') {
-		getWeather()
+
+searchButton.addEventListener('click', () => {
+	if(cityInput.value !== ''){
+		getWeather(cityInput.value)
 	}
 })
-setCookie('name', '123')
+cityInput.addEventListener('keydown', (e) => {
+	if (e.code === 'Enter' && cityInput.value !== '') {
+		getWeather(cityInput.value)
+	}
+})
+
