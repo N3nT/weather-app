@@ -1,9 +1,12 @@
 import axios from 'axios'
 import './style.scss'
 
+const body = document.querySelector('body')
+const box = document.querySelector('.box')
 const cityName = document.querySelector('.box__left-weather-info-city')
 const tempContent = document.querySelector('.box__left-weather-info-temp')
 const dataInfo = document.querySelector('.box__left-weather-info-date')
+const weatherIcon = document.querySelector('.box__left-weather-info-icon')
 
 const searchButton = document.querySelector('.box__right-btn')
 const cityInput = document.querySelector('.box__right-input')
@@ -75,6 +78,8 @@ const getWeather = (cityName) => {
 		lastSearch(data.name)
 		writeData(data)
 		document.cookie = `cityName=${data.name}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
+		setBackground(600)
+		//data.weather[0].id
 	})
 	cityInput.value = ''
 }
@@ -87,6 +92,7 @@ const getCookie = (name) => {
 
 const writeData = (data) => {
 	cityName.textContent = data.name
+	weatherIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">`
 	tempContent.innerHTML = `${Math.round(data.main.temp, 0.5)}&deg;`
 	pressure.textContent = `Pressure: ${data.main.pressure} hPa`
 	humidity.textContent = `Humidity: ${data.main.humidity} %`
@@ -114,7 +120,7 @@ const lastSearch = (city) => {
 	let lastLocationsArray = convertNodeList(lastLocationsNode)
 	const lastLocationElement = document.createElement('p')
 	lastLocationElement.classList.add('box__right-location')
-
+	lastLocationElement.setAttribute('onclick', `getWeather('${city}')`)
 	if (!lastLocationsArray.includes(city)) {
 		lastLocationElement.textContent = city
 		if (lastLocationsNode.length > 2) {
@@ -135,6 +141,66 @@ const convertNodeList = (nodeList) => {
 	return array
 }
 
+const setBackground = (status) => {
+	if(status === 200){
+		body.style.backgroundImage = 'url(./img/200.jpg)'
+		box.style.backgroundImage = 'url(./img/200.jpg)'
+	} else if (status >= 300 && status < 400){
+		body.style.backgroundImage = "url(/img/301.jpg)"
+		box.style.backgroundImage = 'url(./img/301.jpg)'
+	} else if(status === 600 || status === 611 || status === 612 || status === 613 || status === 615 || status === 616 || status === 620 || status === 621){
+		body.style.backgroundImage = "url(/img/600.jpg)"
+		box.style.backgroundImage = 'url(./img/600.jpg)'
+	} else if(status === 601){
+		body.style.backgroundImage = "url(/img/601.jpg)"
+		box.style.backgroundImage = 'url(./img/601.jpg)'
+	} else if(status === 602 || status === 622){
+		body.style.backgroundImage = "url(/img/602.jpg)"
+		box.style.backgroundImage = 'url(./img/602.jpg)'
+	} 
+	else if(status === 701){
+		//zdjecie okocimia
+	} else if(status === 711){
+		body.style.backgroundImage = "url(/img/711.jpg)"
+		box.style.backgroundImage = 'url(./img/711.jpg)'
+	} else if(status === 721){
+		body.style.backgroundImage = "url(/img/721.jpg)"
+		box.style.backgroundImage = 'url(./img/721.jpg)'
+	} else if(status === 731){
+		body.style.backgroundImage = "url(/img/731.jpg)"
+		box.style.backgroundImage = 'url(./img/731.jpg)'
+	} else if(status === 741){
+		body.style.backgroundImage = "url(/img/741.jpg)"
+		box.style.backgroundImage = 'url(./img/741.jpg)'
+	} else if(status === 762){
+		body.style.backgroundImage = "url(/img/762.jpg)"
+		box.style.backgroundImage = 'url(./img/762.jpg)'
+	} else if(status === 781){
+		body.style.backgroundImage = "url(/img/781.jpg)"
+		box.style.backgroundImage = 'url(./img/781.jpg)'
+	}
+	 else if (status === 800){
+		body.style.backgroundImage = 'url(./img/800.jpg)'
+		box.style.backgroundImage = 'url(./img/800.jpg)'
+	} else if (status === 801){
+		body.style.backgroundImage = 'url(./img/801.jpg)'
+		box.style.backgroundImage = 'url(./img/801.jpg)'
+	}else if(status === 802){
+		body.style.backgroundImage = 'url(./img/802.jpg)'
+		box.style.backgroundImage = 'url(./img/802.jpg)'
+	} else if(status === 803){
+		body.style.backgroundImage = 'url(./img/803.jpg)'
+		box.style.backgroundImage = 'url(./img/803.jpg)'
+	} else if(status === 804){
+		body.style.backgroundImage = 'url(./img/804.jpg)'
+		box.style.backgroundImage = 'url(./img/804.jpg)'
+	}
+	else {
+		body.style.backgroundImage = 'url(./img/default.jpg)'
+		box.style.backgroundImage = 'url(./img/default.jpg)'
+	}
+}
+
 document.addEventListener('load',
 	getWeather(getCookie('cityName')),
 	getTime(),
@@ -148,9 +214,11 @@ searchButton.addEventListener('click', () => {
 		getWeather(cityInput.value)
 	}
 })
+
 cityInput.addEventListener('keydown', (e) => {
 	if (e.code === 'Enter' && cityInput.value !== '') {
 		getWeather(cityInput.value)
 	}
 })
 
+window.getWeather = getWeather
