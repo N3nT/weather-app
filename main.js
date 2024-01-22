@@ -123,8 +123,7 @@ const lastSearch = (city) => {
 	lastLocationElement.setAttribute('onclick', `getWeather('${city}')`)
 	if (!lastLocationsArray.includes(city)) {
 		lastLocationElement.textContent = city
-		if (lastLocationsNode.length > 2) {
-			//???
+		if (lastLocationsNode.length > 2) { //???
 			lastLocations.lastChild.remove()
 			lastLocations.prepend(lastLocationElement)
 		} else {
@@ -146,38 +145,38 @@ const setBackground = (status) => {
 		body.style.backgroundImage = 'url(./img/200.jpg)'
 		box.style.backgroundImage = 'url(./img/200.jpg)'
 	} else if (status >= 300 && status < 400){
-		body.style.backgroundImage = "url(/img/301.jpg)"
+		body.style.backgroundImage = "url(./img/301.jpg)"
 		box.style.backgroundImage = 'url(./img/301.jpg)'
 	} else if(status === 600 || status === 611 || status === 612 || status === 613 || status === 615 || status === 616 || status === 620 || status === 621){
-		body.style.backgroundImage = "url(/img/600.jpg)"
+		body.style.backgroundImage = "url(./img/600.jpg)"
 		box.style.backgroundImage = 'url(./img/600.jpg)'
 	} else if(status === 601){
-		body.style.backgroundImage = "url(/img/601.jpg)"
+		body.style.backgroundImage = "url(./img/601.jpg)"
 		box.style.backgroundImage = 'url(./img/601.jpg)'
 	} else if(status === 602 || status === 622){
-		body.style.backgroundImage = "url(/img/602.jpg)"
+		body.style.backgroundImage = "url(./img/602.jpg)"
 		box.style.backgroundImage = 'url(./img/602.jpg)'
 	} 
 	else if(status === 701){
-		body.style.backgroundImage = "url(/img/701.jpg)"
+		body.style.backgroundImage = "url(./img/701.jpg)"
 		box.style.backgroundImage = 'url(./img/701.jpg)'
 	} else if(status === 711){
-		body.style.backgroundImage = "url(/img/711.jpg)"
+		body.style.backgroundImage = "url(./img/711.jpg)"
 		box.style.backgroundImage = 'url(./img/711.jpg)'
 	} else if(status === 721){
-		body.style.backgroundImage = "url(/img/721.jpg)"
+		body.style.backgroundImage = "url(./img/721.jpg)"
 		box.style.backgroundImage = 'url(./img/721.jpg)'
 	} else if(status === 731){
-		body.style.backgroundImage = "url(/img/731.jpg)"
+		body.style.backgroundImage = "url(./img/731.jpg)"
 		box.style.backgroundImage = 'url(./img/731.jpg)'
 	} else if(status === 741){
-		body.style.backgroundImage = "url(/img/741.jpg)"
+		body.style.backgroundImage = "url(./img/741.jpg)"
 		box.style.backgroundImage = 'url(./img/741.jpg)'
 	} else if(status === 762){
-		body.style.backgroundImage = "url(/img/762.jpg)"
+		body.style.backgroundImage = "url(./img/762.jpg)"
 		box.style.backgroundImage = 'url(./img/762.jpg)'
 	} else if(status === 781){
-		body.style.backgroundImage = "url(/img/781.jpg)"
+		body.style.backgroundImage = "url(./img/781.jpg)"
 		box.style.backgroundImage = 'url(./img/781.jpg)'
 	}
 	 else if (status === 800){
@@ -202,6 +201,19 @@ const setBackground = (status) => {
 	}
 }
 
+const unixToHours = (unix) => {
+	const date = new Date(unix * 1000)
+	const hours = date.getHours()
+	let minutes
+	if(date.getMinutes() < 10){
+		minutes = "0" + date.getMinutes()
+	} else {
+		minutes = date.getMinutes()
+	}
+	
+	return `${hours}:${minutes}`
+}
+
 document.addEventListener('load',
 	getWeather(getCookie('cityName')),
 	getTime(),
@@ -222,4 +234,5 @@ cityInput.addEventListener('keydown', (e) => {
 	}
 })
 
+console.log(unixToHours(1705936393));
 window.getWeather = getWeather
