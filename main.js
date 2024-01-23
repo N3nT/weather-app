@@ -153,6 +153,19 @@ const setBackground = (status) => {
 	if (status === 200) {
 		body.style.backgroundImage = 'url(./img/200.jpg)'
 		box.style.backgroundImage = 'url(./img/200.jpg)'
+	} else if (status === 201 || status === 202) {
+		body.style.backgroundImage = 'url(./img/201.jpg)'
+		box.style.backgroundImage = 'url(./img/201.jpg)'
+	} else if (status === 210 || status === 211) {
+		body.style.backgroundImage = 'url(./img/210.jpg)'
+		box.style.backgroundImage = 'url(./img/210.jpg)'
+	} else if (
+		status === 212 ||
+		status === 221 ||
+		(status === 230) | (status === 231) | (status === 232)
+	) {
+		body.style.backgroundImage = 'url(./img/212.jpg)'
+		box.style.backgroundImage = 'url(./img/212.jpg)'
 	} else if (status === 300) {
 		body.style.backgroundImage = 'url(./img/300.jpg)'
 		box.style.backgroundImage = 'url(./img/300.jpg)'
@@ -168,8 +181,7 @@ const setBackground = (status) => {
 	} else if (status === 314 || status === 321) {
 		body.style.backgroundImage = 'url(./img/314.jpg)'
 		box.style.backgroundImage = 'url(./img/314.jpg)'
-	} 
-	else if (status === 500) {
+	} else if (status === 500) {
 		body.style.backgroundImage = 'url(./img/500.jpg)'
 		box.style.backgroundImage = 'url(./img/500.jpg)'
 	} else if (status === 501 || status === 502) {
