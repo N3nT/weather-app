@@ -120,6 +120,11 @@ body {
 			font-size: 14px;
 			&-item {
 				padding: 10px;
+				&:last-child{
+					margin-top: 2em;
+					opacity: 0.7;
+					font-size: 1rem;
+				}
 			}
 		}
 	}

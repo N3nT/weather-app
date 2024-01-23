@@ -23,6 +23,10 @@ const windSpeed = document.querySelector('.box__right-info-windspeed')
 const windGust = document.querySelector('.box__right-info-windgust')
 const windDeg = document.querySelector('.box__right-info-winddeg')
 
+const localTime = document.querySelector('.box__right-info-time')
+const sunrise = document.querySelector('.box__right-info-sunrise')
+const sunset = document.querySelector('.box__right-info-sunset')
+
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather?q='
 const API_KEY = 'a1f28905bb879b4ebe17972bf2fe8cf6'
 const API_UNITS = '&units=metric'
@@ -79,7 +83,6 @@ const getWeather = (cityName) => {
 		writeData(data)
 		document.cookie = `cityName=${data.name}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
 		setBackground(data.weather[0].id)
-		//701
 	})
 	cityInput.value = ''
 }
@@ -102,7 +105,7 @@ const writeData = (data) => {
 	if (data.visibility < 1000) {
 		visibility.textContent = `Visibility: ${data.visibility} m`
 	} else {
-		visibility.textContent = `Visibility: ${data.visibility / 1000} km`
+		visibility.textContent = `Visibility: ${Math.round(data.visibility / 1000, 0.5)} km`
 	}
 	windSpeed.textContent = `Wind speed: ${data.wind.speed} (m/s)`
 	if (data.wind.gust === undefined) {
@@ -111,6 +114,8 @@ const writeData = (data) => {
 		windGust.textContent = `Wind gust: ${data.wind.gust} (m/s)`
 	}
 	windDeg.textContent = `Wind degree: ${data.wind.deg}`
+	sunrise.textContent = `Sunrise: ${unixToHours(data.sys.sunrise)}*`
+	sunset.textContent = `Sunset: ${unixToHours(data.sys.sunset)}*`
 }
 
 const lastSearch = (city) => {
