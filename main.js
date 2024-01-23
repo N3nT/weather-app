@@ -153,10 +153,23 @@ const setBackground = (status) => {
 	if (status === 200) {
 		body.style.backgroundImage = 'url(./img/200.jpg)'
 		box.style.backgroundImage = 'url(./img/200.jpg)'
-	} else if (status >= 300 && status < 400) {
+	} else if (status === 300) {
+		body.style.backgroundImage = 'url(./img/300.jpg)'
+		box.style.backgroundImage = 'url(./img/300.jpg)'
+	} else if (status === 301 || status === 302) {
 		body.style.backgroundImage = 'url(./img/301.jpg)'
 		box.style.backgroundImage = 'url(./img/301.jpg)'
-	} else if (status === 500) {
+	} else if (status === 310 || status === 311) {
+		body.style.backgroundImage = 'url(./img/310.jpg)'
+		box.style.backgroundImage = 'url(./img/310.jpg)'
+	} else if (status === 312 || status === 313) {
+		body.style.backgroundImage = 'url(./img/312.jpg)'
+		box.style.backgroundImage = 'url(./img/312.jpg)'
+	} else if (status === 314 || status === 321) {
+		body.style.backgroundImage = 'url(./img/314.jpg)'
+		box.style.backgroundImage = 'url(./img/314.jpg)'
+	} 
+	else if (status === 500) {
 		body.style.backgroundImage = 'url(./img/500.jpg)'
 		box.style.backgroundImage = 'url(./img/500.jpg)'
 	} else if (status === 501 || status === 502) {
