@@ -23,7 +23,6 @@ const windSpeed = document.querySelector('.box__right-info-windspeed')
 const windGust = document.querySelector('.box__right-info-windgust')
 const windDeg = document.querySelector('.box__right-info-winddeg')
 
-const localTime = document.querySelector('.box__right-info-time')
 const sunrise = document.querySelector('.box__right-info-sunrise')
 const sunset = document.querySelector('.box__right-info-sunset')
 
@@ -78,7 +77,6 @@ const getWeather = (cityName) => {
 
 	axios.get(URL).then((resposne) => {
 		const data = resposne.data
-		console.log(data)
 		lastSearch(data.name)
 		writeData(data)
 		document.cookie = `cityName=${data.name}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
@@ -132,7 +130,6 @@ const lastSearch = (city) => {
 	if (!lastLocationsArray.includes(city)) {
 		lastLocationElement.textContent = city
 		if (lastLocationsNode.length > 2) {
-			//???
 			lastLocations.lastChild.remove()
 			lastLocations.prepend(lastLocationElement)
 		} else {
@@ -295,5 +292,4 @@ cityInput.addEventListener('keydown', (e) => {
 	}
 })
 
-console.log(unixToHours(1705936393))
 window.getWeather = getWeather
