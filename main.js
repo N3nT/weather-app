@@ -88,10 +88,10 @@ const getWeather = (cityName) => {
 }
 
 const getCookie = (name) => {
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(';').shift();
-  }
+	const value = `; ${document.cookie}`
+	const parts = value.split(`; ${name}=`)
+	if (parts.length === 2) return parts.pop().split(';').shift()
+}
 
 const writeData = (data) => {
 	cityName.textContent = data.name
@@ -105,7 +105,10 @@ const writeData = (data) => {
 	if (data.visibility < 1000) {
 		visibility.textContent = `Visibility: ${data.visibility} m`
 	} else {
-		visibility.textContent = `Visibility: ${Math.round(data.visibility / 1000, 0.5)} km`
+		visibility.textContent = `Visibility: ${Math.round(
+			data.visibility / 1000,
+			0.5
+		)} km`
 	}
 	windSpeed.textContent = `Wind speed: ${data.wind.speed} (m/s)`
 	if (data.wind.gust === undefined) {
@@ -128,7 +131,8 @@ const lastSearch = (city) => {
 	lastLocationElement.setAttribute('onclick', `getWeather('${city}')`)
 	if (!lastLocationsArray.includes(city)) {
 		lastLocationElement.textContent = city
-		if (lastLocationsNode.length > 2) { //???
+		if (lastLocationsNode.length > 2) {
+			//???
 			lastLocations.lastChild.remove()
 			lastLocations.prepend(lastLocationElement)
 		} else {
@@ -146,61 +150,87 @@ const convertNodeList = (nodeList) => {
 }
 
 const setBackground = (status) => {
-	if(status === 200){
+	if (status === 200) {
 		body.style.backgroundImage = 'url(./img/200.jpg)'
 		box.style.backgroundImage = 'url(./img/200.jpg)'
-	} else if (status >= 300 && status < 400){
-		body.style.backgroundImage = "url(./img/301.jpg)"
+	} else if (status >= 300 && status < 400) {
+		body.style.backgroundImage = 'url(./img/301.jpg)'
 		box.style.backgroundImage = 'url(./img/301.jpg)'
-	} else if(status === 600 || status === 611 || status === 612 || status === 613 || status === 615 || status === 616 || status === 620 || status === 621){
-		body.style.backgroundImage = "url(./img/600.jpg)"
+	} else if (status === 500) {
+		body.style.backgroundImage = 'url(./img/500.jpg)'
+		box.style.backgroundImage = 'url(./img/500.jpg)'
+	} else if (status === 501 || status === 502) {
+		body.style.backgroundImage = 'url(./img/502.jpg)'
+		box.style.backgroundImage = 'url(./img/502.jpg)'
+	} else if (status === 503 || status === 504) {
+		body.style.backgroundImage = 'url(./img/503.jpg)'
+		box.style.backgroundImage = 'url(./img/503.jpg)'
+	} else if (status === 511) {
+		body.style.backgroundImage = 'url(./img/511.jpg)'
+		box.style.backgroundImage = 'url(./img/511.jpg)'
+	} else if (
+		status === 520 ||
+		status === 521 ||
+		status === 522 ||
+		status === 532
+	) {
+		body.style.backgroundImage = 'url(./img/520.jpg)'
+		box.style.backgroundImage = 'url(./img/520.jpg)'
+	} else if (
+		status === 600 ||
+		status === 611 ||
+		status === 612 ||
+		status === 613 ||
+		status === 615 ||
+		status === 616 ||
+		status === 620 ||
+		status === 621
+	) {
+		body.style.backgroundImage = 'url(./img/600.jpg)'
 		box.style.backgroundImage = 'url(./img/600.jpg)'
-	} else if(status === 601){
-		body.style.backgroundImage = "url(./img/601.jpg)"
+	} else if (status === 601) {
+		body.style.backgroundImage = 'url(./img/601.jpg)'
 		box.style.backgroundImage = 'url(./img/601.jpg)'
-	} else if(status === 602 || status === 622){
-		body.style.backgroundImage = "url(./img/602.jpg)"
+	} else if (status === 602 || status === 622) {
+		body.style.backgroundImage = 'url(./img/602.jpg)'
 		box.style.backgroundImage = 'url(./img/602.jpg)'
-	} 
-	else if(status === 701){
-		body.style.backgroundImage = "url(./img/701.jpg)"
+	} else if (status === 701) {
+		body.style.backgroundImage = 'url(./img/701.jpg)'
 		box.style.backgroundImage = 'url(./img/701.jpg)'
-	} else if(status === 711){
-		body.style.backgroundImage = "url(./img/711.jpg)"
+	} else if (status === 711) {
+		body.style.backgroundImage = 'url(./img/711.jpg)'
 		box.style.backgroundImage = 'url(./img/711.jpg)'
-	} else if(status === 721){
-		body.style.backgroundImage = "url(./img/721.jpg)"
+	} else if (status === 721) {
+		body.style.backgroundImage = 'url(./img/721.jpg)'
 		box.style.backgroundImage = 'url(./img/721.jpg)'
-	} else if(status === 731){
-		body.style.backgroundImage = "url(./img/731.jpg)"
+	} else if (status === 731) {
+		body.style.backgroundImage = 'url(./img/731.jpg)'
 		box.style.backgroundImage = 'url(./img/731.jpg)'
-	} else if(status === 741){
-		body.style.backgroundImage = "url(./img/741.jpg)"
+	} else if (status === 741) {
+		body.style.backgroundImage = 'url(./img/741.jpg)'
 		box.style.backgroundImage = 'url(./img/741.jpg)'
-	} else if(status === 762){
-		body.style.backgroundImage = "url(./img/762.jpg)"
+	} else if (status === 762) {
+		body.style.backgroundImage = 'url(./img/762.jpg)'
 		box.style.backgroundImage = 'url(./img/762.jpg)'
-	} else if(status === 781){
-		body.style.backgroundImage = "url(./img/781.jpg)"
+	} else if (status === 781) {
+		body.style.backgroundImage = 'url(./img/781.jpg)'
 		box.style.backgroundImage = 'url(./img/781.jpg)'
-	}
-	 else if (status === 800){
+	} else if (status === 800) {
 		body.style.backgroundImage = 'url(./img/800.jpg)'
 		box.style.backgroundImage = 'url(./img/800.jpg)'
-	} else if (status === 801){
+	} else if (status === 801) {
 		body.style.backgroundImage = 'url(./img/801.jpg)'
 		box.style.backgroundImage = 'url(./img/801.jpg)'
-	}else if(status === 802){
+	} else if (status === 802) {
 		body.style.backgroundImage = 'url(./img/802.jpg)'
 		box.style.backgroundImage = 'url(./img/802.jpg)'
-	} else if(status === 803){
+	} else if (status === 803) {
 		body.style.backgroundImage = 'url(./img/803.jpg)'
 		box.style.backgroundImage = 'url(./img/803.jpg)'
-	} else if(status === 804){
+	} else if (status === 804) {
 		body.style.backgroundImage = 'url(./img/804.jpg)'
 		box.style.backgroundImage = 'url(./img/804.jpg)'
-	}
-	else {
+	} else {
 		body.style.backgroundImage = 'url(./img/default.jpg)'
 		box.style.backgroundImage = 'url(./img/default.jpg)'
 	}
@@ -210,16 +240,17 @@ const unixToHours = (unix) => {
 	const date = new Date(unix * 1000)
 	const hours = date.getHours()
 	let minutes
-	if(date.getMinutes() < 10){
-		minutes = "0" + date.getMinutes()
+	if (date.getMinutes() < 10) {
+		minutes = '0' + date.getMinutes()
 	} else {
 		minutes = date.getMinutes()
 	}
-	
+
 	return `${hours}:${minutes}`
 }
 
-document.addEventListener('load',
+document.addEventListener(
+	'load',
 	getWeather(getCookie('cityName')),
 	getTime(),
 	setInterval(() => {
@@ -228,7 +259,7 @@ document.addEventListener('load',
 )
 
 searchButton.addEventListener('click', () => {
-	if(cityInput.value !== ''){
+	if (cityInput.value !== '') {
 		getWeather(cityInput.value)
 	}
 })
@@ -239,5 +270,5 @@ cityInput.addEventListener('keydown', (e) => {
 	}
 })
 
-console.log(unixToHours(1705936393));
+console.log(unixToHours(1705936393))
 window.getWeather = getWeather
